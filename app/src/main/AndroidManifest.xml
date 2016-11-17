@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jarvanmo.slientpackageinstaller"
+    android:sharedUserId="android.uid.system"
+    >
+
+
+
+    <uses-permission
+        android:name="android.permission.INSTALL_PACKAGES"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.DELETE_PACKAGES"
+        tools:ignore="ProtectedPermissions"
+        />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoDisplay"
+
+        >
+        <activity android:name=".MainActivity"
+            android:excludeFromRecents="true"
+            android:permission="com.jarvanmo.slientpackageinstaller.INSTALL_SILENT"
+            >
+
+            <intent-filter>
+                <action android:name="com.jarvanmo.install_packages" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:scheme="package" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <activity-alias
+            android:name="Uninstall"
+            android:excludeFromRecents="true"
+            android:targetActivity=".MainActivity"
+            android:permission="com.jarvanmo.slientpackageinstaller.UNINSTALL_SILENT"
+            >
+
+            <intent-filter>
+                <action android:name="com.jarvanmo.delete_packages" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:scheme="package" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity-alias>
+
+        <service android:name=".PmService"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
